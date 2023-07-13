@@ -17,11 +17,16 @@ const openai = new OpenAIApi(configuration);
 // Import the express and cors packages.
 import express from "express";
 import cors from "cors";
+// cors options makes it so you can make requests from localhost:5173
+const corsOptions = {
+  origin: "http://localhost:5173", // Replace with your allowed origin
+  optionsSuccessStatus: 200, // Some legacy browsers (e.g., IE11) choke on 204
+};
 
 // Create a new express application instance.
 const app = express();
 // Use CORS middleware to enable CORS with various options.
-app.use(cors());
+app.use(cors(corsOptions));
 // Use express.json() middleware for parsing incoming JSON in request bodies.
 app.use(express.json());
 
