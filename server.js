@@ -57,5 +57,10 @@ app.post("/dream", async (req, res) => {
   res.send({ image });
 });
 
+app.get("/dream", async (req, res) => {
+  // Log the received request body.
+  res.send("hello");
+});
+
 // Start the express server and listen for connections on port 5500.
-app.listen(5500, () => console.log("make art on http://localhost:5500/dream"));
+app.listen(3000, () => console.log("make art on http://localhost:3000/dream"));

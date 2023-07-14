@@ -11,7 +11,7 @@ form.addEventListener("submit", async (e) => {
     const data = new FormData(form);
 
     // Send a POST request to the "/dream" endpoint with the form data.
-    const response = await fetch("http://localhost:5500/dream", {
+    const response = await fetch("http://localhost:3000/dream", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
