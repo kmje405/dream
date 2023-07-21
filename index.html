@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta information -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Page title -->
     <title>AI Photo Generator</title>
+
+    <!-- Link to external CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
+    <!-- Main content -->
     <main>
+      <!-- Page heading -->
       <h1>AI Photo Generator</h1>
+
+      <!-- Image display area -->
       <div id="resultWindow">
-        <img id="resultImage" src="#" alt="Submit, then standby for your custom hallucination!" />
+        <img
+          id="resultImage"
+          src="#"
+          alt="Submit, then standby for your custom hallucination!"
+        />
       </div>
+
+      <!-- Form for user input -->
       <form id="imageProcessor">
         <div class="form-group">
+          <!-- Instruction label -->
           <label for="promptInput" class="labelBox">
-            **NOTE**  
-            <br>
+            **NOTE**
+            <br />
             Enter your prompt in the box below, then click submit!
           </label>
+
+          <!-- Text input area -->
           <textarea
             id="promptInput"
             name="promptInput"
@@ -27,10 +46,21 @@
           ></textarea>
         </div>
 
-        <button type="submit" class="button">Submit!</button>
+        <!-- Submit button with loading spinner -->
+        <button class="button" type="submit">
+          Submit
+          <div
+            class="spinner-border spinner-border-sm d-none"
+            role="status"
+            id="spinner"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </button>
       </form>
     </main>
 
+    <!-- External JavaScript files -->
     <script src="rotateGradient.js"></script>
     <script type="module" src="/main.js"></script>
   </body>

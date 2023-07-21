@@ -1,10 +1,16 @@
 // Select the form element from the DOM.
-const form = document.querySelector("form");
+const form = document.querySelector("#imageProcessor");
+
+// Select the spinner from the DOM.
+const spinner = document.querySelector("#spinner");
 
 // Add a submit event listener to the form.
 form.addEventListener("submit", async (e) => {
   // Prevent the default form submission action.
   e.preventDefault();
+
+  // Show the spinner.
+  spinner.classList.remove("d-none");
 
   try {
     // Create a new FormData object from the form.
@@ -18,7 +24,7 @@ form.addEventListener("submit", async (e) => {
       },
       // Convert the form data to a JSON string before sending it in the request body.
       body: JSON.stringify({
-        prompt: data.get("prompt"),
+        prompt: data.get("promptInput"),
       }),
     });
 
@@ -26,11 +32,14 @@ form.addEventListener("submit", async (e) => {
     const { image } = await response.json();
 
     // Select the result element from the DOM.
-    const result = document.querySelector("#result");
-    // Insert an img element into the result element, using the image URL from the response.
-    result.innerHTML = `<img src="${image}" width="512" />`;
+    const resultImage = document.querySelector("#resultImage");
+    // Update the src attribute of the result image.
+    resultImage.src = image;
   } catch (err) {
     // Log any errors that occur during the fetch operation.
     console.error(err);
+  } finally {
+    // Hide the spinner.
+    spinner.classList.add("d-none");
   }
 });
