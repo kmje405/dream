@@ -12,7 +12,7 @@ const configuration = new Configuration({
 });
 
 // Initialize the OpenAI API with the configuration object.
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAIApi(configuration); 
 
 // Import the express and cors packages.
 import express from "express";
