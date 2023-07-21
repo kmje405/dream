@@ -1,6 +1,6 @@
 # AI Photo Generator
 
-This AI Photo Generator is a project that integrates OpenAI's DALL·E to generate images based on user-defined prompts. The project is comprised of a simple and aesthetically pleasing front-end that interacts with a back-end Express server, which is responsible for communicating with OpenAI's API.
+This AI Photo Generator is a project that integrates OpenAI's DALL·E to generate images based on user-defined prompts. The project is comprised of a nice and aesthetically pleasing front-end that interacts with a back-end Express server, which is responsible for communicating with OpenAI's API.
 
 ## Features
 
@@ -23,7 +23,7 @@ Run `npm install` in the root directory to install all the necessary packages th
 
 You'll need to sign up for an account on the OpenAI website to get an API key. After obtaining the key, create a `.env` file in your root directory and add your OpenAI API key as follows:
 
-```
+``` bash
 OPENAI_API_KEY=your-api-key-goes-here
 ```
 
