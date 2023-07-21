@@ -1,42 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap");
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+:root {
+  --clr-1: #0ff0fc;
+  --clr-2: #bc13fe;
+  --clr-3: #8a2be2;
+  --clr-4: #ff3131;
+  --clr-5: #ff5e00;
+  --clr-6: #000000;
+  --clr-7: #232346;
+  --gradient-angle: 0deg;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f0f0f0;
-  font-family: Arial, sans-serif;
+  background-color: rgba(0, 0, 128, 0.5);
+  opacity: 1;
+  font-family: "Syne Mono", monospace;
 }
 
-form {
+main {
+  position: relative;
+  height: 60hv;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form input {
-  margin: 10px 0;
-  padding: 10px;
-  width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-}
-
-form button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: #007bff;
+  background-color: rgba(138, 43, 226, 0.5); /* 50% transparency */  border-radius: 0.5rem;
+  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
   color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+  opacity: .75;
 }
 
-form button:hover {
-  background: #0056b3;
+main::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  bottom: -10px;
+  left: -10px;
+  border: 10px solid;
+  border-radius: 0.5rem;
+  border-image: conic-gradient(
+      from var(--gradient-angle),
+      var(--clr-1),
+      var(--clr-2),
+      var(--clr-3),
+      var(--clr-4),
+      var(--clr-5),
+      var(--clr-4),
+      var(--clr-3),
+      var(--clr-2),
+      var(--clr-1)
+    )
+    1;
+  filter: blur(5px); /* Adjust blur as desired */
+  z-index: -1; /* Ensure the pseudo-element is behind the main element */
+}
+  animation: rotation 20s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
+form #imageProcessor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  width: %100;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  justify-content: center;
+  
+
+}
+
+.labelBox {
+  width: 300px;
+  padding: 0.5rem;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.5vw;
+  justify-content:center;
+  align-items:center;
+  background-color: rgba(138, 43, 226, .1);   
+  border-radius: 0.5rem;
+
+}
+
+#resultWindow {
+  width: 300px;
+  height: 300px;
+  border: 1px solid var(--clr-6);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 1rem;
+  
+}
+
+#resultImage {
+  max-width: 100%;
+  max-height: 100%;
+
+}
+
+#promptInput {
+  height: 150px;
+}
+
+.button {
+  background-color: rgba(138, 43, 226, 1);   
+  border: 3px solid var(--clr-5);
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  color: cyan ;
 }

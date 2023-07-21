@@ -3,23 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Photo Generator</title>
     <link rel="stylesheet" href="style.css" />
-    <title>Dalle-Image-Gen</title>
   </head>
   <body>
     <main>
       <h1>AI Photo Generator</h1>
-
-      <div id="result">Image will appear here</div>
-
-      <form>
-        <label for="prompt">Prompt</label>
-        <textarea name="prompt" maxlength="160"></textarea>
-
-        <button type="submit">Dream</button>
+      <div id="resultWindow">
+        <img id="resultImage" src="#" alt="BRB! I'm making this up as I go!" />
+      </div>
+      <form id="imageProcessor">
+        <div class="form-group">
+          <label for="promptInput" class="labelBox">
+            Note: Enter Prompt (max 280 characters):
+          </label>
+          <input
+            type="text"
+            id="promptInput"
+            name="promptInput"
+            maxlength="280"
+          />
+        </div>
+        <button type="submit" class="button">Press to Hallucinate!</button>
       </form>
     </main>
 
+    <script src="rotateGradient.js"></script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
