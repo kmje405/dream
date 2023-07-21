@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 @property --gradient-angle {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
+
 :root {
   --clr-1: #0ff0fc;
   --clr-2: #bc13fe;
@@ -14,6 +15,7 @@
   --clr-6: #000000;
   --clr-7: #232346;
   --gradient-angle: 0deg;
+  --ff-primary: "Varela Round", sans-serif;
 }
 
 body {
@@ -22,24 +24,25 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: rgba(0, 0, 128, 0.5);
-  opacity: 1;
-  font-family: "Syne Mono", monospace;
+  font-family: var(--ff-primary);
+  background-color: var(--clr-7);
+
 }
 
 main {
   position: relative;
-  height: 60hv;
   max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: rgba(138, 43, 226, 0.5); /* 50% transparency */  border-radius: 0.5rem;
-  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
+  background-color: rgba(0, 0, 128, 0.3);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(20px);
   color: white;
-  opacity: .75;
+  width: 60%; /* set width to a percentage of parent */
+  min-height: 60vh; /* set a minimum height */
 }
 
 main::before {
@@ -64,88 +67,71 @@ main::before {
       var(--clr-1)
     )
     1;
-  filter: blur(5px); /* Adjust blur as desired */
-  z-index: -1; /* Ensure the pseudo-element is behind the main element */
-}
-  animation: rotation 20s linear infinite;
+  filter: blur(5px);
+  z-index: -1;
 }
 
-@keyframes rotation {
-  0% {
-    --gradient-angle: 0deg;
-  }
-  100% {
-    --gradient-angle: 360deg;
-  }
-}
-
-form #imageProcessor {
-  display: flex;
-  flex-direction: column;
+.form-group,
+#promptInput,
+.button,
+.labelBox {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  justify-content: center;
   align-items: center;
-  width: 50%;
-  margin-bottom: 20px;
+  align-content: center;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  font-weight: bold;
+  color: white;
 }
 
 .form-group {
-  width: %100;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  justify-content: center;
-  
-
-}
-
-.labelBox {
-  width: 300px;
-  padding: 0.5rem;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
   text-align: center;
-  font-size: 1.5vw;
-  justify-content:center;
-  align-items:center;
-  background-color: rgba(138, 43, 226, .1);   
-  border-radius: 0.5rem;
-
-}
-
-#resultWindow {
-  width: 300px;
-  height: 300px;
-  border: 1px solid var(--clr-6);
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  padding: 1rem;
-  
-}
-
-#resultImage {
-  max-width: 100%;
-  max-height: 100%;
-
 }
 
 #promptInput {
-  height: 150px;
+  height: auto;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: white;
+  resize: none;
+  line-height: 1.5;
+}
+
+#promptInput:focus {
+  outline: none;
 }
 
 .button {
-  background-color: rgba(138, 43, 226, 1);   
-  border: 3px solid var(--clr-5);
-  color: white;
-  padding: 10px 20px;
+  background-color: white transparent;
+  padding: 10px 10px;
   margin-top: 10px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  display: flex;
   font-size: 16px;
-  border-radius: 5px;
   cursor: pointer;
-  width: 100%;
-  color: cyan ;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 50%;
+  color: white;
+  border-radius: 10px;
+  transition: 0.66s ease-in-out;
+  margin: 20px auto;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--clr-7);
+  transition: 0.66s ease-in-out;
 }

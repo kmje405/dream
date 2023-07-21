@@ -10,21 +10,24 @@
     <main>
       <h1>AI Photo Generator</h1>
       <div id="resultWindow">
-        <img id="resultImage" src="#" alt="BRB! I'm making this up as I go!" />
+        <img id="resultImage" src="#" alt="Submit, then standby for your custom hallucination!" />
       </div>
       <form id="imageProcessor">
         <div class="form-group">
           <label for="promptInput" class="labelBox">
-            Note: Enter Prompt (max 280 characters):
+            **NOTE**  
+            <br>
+            Enter your prompt in the box below, then click submit!
           </label>
-          <input
-            type="text"
+          <textarea
             id="promptInput"
             name="promptInput"
             maxlength="280"
-          />
+            rows="5"
+          ></textarea>
         </div>
-        <button type="submit" class="button">Press to Hallucinate!</button>
+
+        <button type="submit" class="button">Submit!</button>
       </form>
     </main>
 
