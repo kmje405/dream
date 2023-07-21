@@ -8,20 +8,22 @@ import { Configuration, OpenAIApi } from "openai";
 
 // Create a configuration object for OpenAI with API key loaded from environment variables.
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY, // Get the API key from environment variables
 });
 
 // Initialize the OpenAI API with the configuration object.
-const openai = new OpenAIApi(configuration); 
+const openai = new OpenAIApi(configuration);
 
 // Import the express and cors packages.
 import express from "express";
 import cors from "cors";
-// cors options makes it so you can make requests from localhost:5173
+
+// CORS options for enabling cross-origin requests.
 const corsOptions = {
-  origin: "http://localhost:5173", // Replace with your allowed origin
+  origin: "http://localhost:5173", // Replace with your front end's localhost port
   optionsSuccessStatus: 200, // Some legacy browsers (e.g., IE11) choke on 204
 };
+
 
 // Create a new express application instance.
 const app = express();
@@ -44,7 +46,7 @@ app.post("/dream", async (req, res) => {
     .createImage({
       prompt,
       n: 1,
-      size: "1024x1024",
+      size: "1024x1024", // Define the size of the image to be created
     })
     .catch((err) => {
       // Log the error message if the API call fails.
@@ -57,10 +59,11 @@ app.post("/dream", async (req, res) => {
   res.send({ image });
 });
 
+// Define a GET route handler for the "/dream" endpoint.
 app.get("/dream", async (req, res) => {
-  // Log the received request body.
+  // Just send a "hello" message for this GET request.
   res.send("hello");
 });
 
-// Start the express server and listen for connections on port 5500.
-app.listen(3000, () => console.log("make art on http://localhost:3000/dream"));
+// Start the express server and listen for connections on port 3000.
+app.listen(3000, () => console.log("Server started. Make art on http://localhost:3000/dream"));
