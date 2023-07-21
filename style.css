@@ -25,7 +25,10 @@ body {
   height: 100vh;
   margin: 0;
   font-family: var(--ff-primary);
-  background-color: rgb(20, 20, 30);
+  background-color: rgba(20, 20, 80, 0.75); /* Increased transparency here */
+  background-image: url("/dream/public/images/retro-bg.jpg"); /* Add your image here */
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 main {
@@ -36,7 +39,7 @@ main {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: rgba(20,20, 80, 0.5);
+  background-color: rgba(20, 20, 80, 0.3);
   border-radius: 0.5rem;
   backdrop-filter: blur(20px);
   color: white;
