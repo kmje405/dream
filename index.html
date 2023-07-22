@@ -1,67 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Meta information -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Page title -->
-    <title>AI Photo Generator</title>
-
-    <!-- Link to external CSS -->
+    <title>AI Image Generator</title>
+    <!-- Add your CSS stylesheets or any other head content here -->
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-    <!-- Main content -->
-    <main>
-      <!-- Page heading -->
-      <h1>AI Photo Generator</h1>
-
-      <!-- Image display area -->
-      <div id="resultWindow">
-        <img
-          id="resultImage"
-          src="#"
-          alt="Submit, then standby for your custom hallucination!"
-        />
+    <h1 class="title">AI Image Generator</h1>
+    <div class="card">
+      <h2 class="card-title">Enter your prompt</h2>
+      <div id="imageProcessor" class="result-window">
+        <img id="resultImage" alt="Generated image will appear here" />
+        <div id="loadingMessage" style="display: none">Loading...</div>
       </div>
-
-      <!-- Form for user input -->
-      <form id="imageProcessor">
-        <div class="form-group">
-          <!-- Instruction label -->
-          <label for="promptInput" class="labelBox">
-            **NOTE**
-            <br />
-            Enter your prompt in the box below, then click submit!
-          </label>
-
-          <!-- Text input area -->
-          <textarea
-            id="promptInput"
-            name="promptInput"
-            maxlength="280"
-            rows="5"
-          ></textarea>
-        </div>
-
-        <!-- Submit button with loading spinner -->
-        <button class="button" type="submit">
-          Submit
-          <div
-            class="spinner-border spinner-border-sm d-none"
-            role="status"
-            id="spinner"
-          >
-            <span class="sr-only">Loading...</span>
-          </div>
-        </button>
-      </form>
-    </main>
-
-    <!-- External JavaScript files -->
-    <script src="rotateGradient.js"></script>
-    <script type="module" src="/main.js"></script>
+      <div class="form-group" id="inputArea">
+        <textarea id="promptInput" rows="10"></textarea>
+        <button id="generate">Generate</button>
+      </div>
+    </div>
+    <script src="main.js"></script>
   </body>
 </html>

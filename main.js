@@ -1,45 +1,61 @@
-// Select the form element from the DOM.
-const form = document.querySelector("#imageProcessor");
+document.addEventListener("DOMContentLoaded", function () {
+  // Object to store DOM elements
+  const domElements = {
+    textarea: document.querySelector("#promptInput"),
+    submitButton: document.querySelector("#generate"),
+    loadingMessage: document.querySelector("#loadingMessage"),
+    resultWindow: document.querySelector("#imageProcessor"),
+    resultImage: document.querySelector("#resultImage"),
+  };
 
-// Select the spinner from the DOM.
-const spinner = document.querySelector("#spinner");
+  // Function to toggle UI Elements
+  function toggleUIElements(isLoading, showButton) {
+    domElements.loadingMessage.style.display = isLoading ? "block" : "none";
+    domElements.textarea.style.display = showButton ? "none" : "block";
+    domElements.resultWindow.style.display = isLoading ? "none" : "block";
 
-// Add a submit event listener to the form.
-form.addEventListener("submit", async (e) => {
-  // Prevent the default form submission action.
-  e.preventDefault();
+    if (showButton) {
+      domElements.submitButton.textContent = "Ready for Another Prompt";
+    } else {
+      domElements.submitButton.textContent = "Generate";
+    }
+  }
 
-  // Show the spinner.
-  spinner.classList.remove("d-none");
-
-  try {
-    // Create a new FormData object from the form.
-    const data = new FormData(form);
-
-    // Send a POST request to the "/dream" endpoint with the form data.
+  // Function to fetch Dream Image
+  async function fetchDreamImage(prompt) {
     const response = await fetch("http://localhost:3000/dream", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Convert the form data to a JSON string before sending it in the request body.
-      body: JSON.stringify({
-        prompt: data.get("promptInput"),
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
     });
 
-    // Parse the JSON response and extract the "image" property from it.
-    const { image } = await response.json();
+    if (!response.ok) {
+      throw new Error("Failed to fetch dream image");
+    }
 
-    // Select the result element from the DOM.
-    const resultImage = document.querySelector("#resultImage");
-    // Update the src attribute of the result image.
-    resultImage.src = image;
-  } catch (err) {
-    // Log any errors that occur during the fetch operation.
-    console.error(err);
-  } finally {
-    // Hide the spinner.
-    spinner.classList.add("d-none");
+    const { image } = await response.json();
+    return image;
   }
+
+  // Add event listener for Button Click
+  domElements.submitButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    // If the button text is "Generate", fetch the image and display it
+    if (domElements.submitButton.textContent === "Generate") {
+      try {
+        toggleUIElements(true, false);
+        const image = await fetchDreamImage(domElements.textarea.value);
+        domElements.resultImage.src = image;
+        domElements.resultImage.style.display = "block";
+        toggleUIElements(false, true);
+      } catch (err) {
+        console.error(err);
+        toggleUIElements(false, false);
+      }
+    } else {
+      // If the button text is "Ready for Another Prompt", reload the page
+      location.reload();
+    }
+  });
 });

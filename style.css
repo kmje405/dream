@@ -1,11 +1,7 @@
+/* Add Google font */
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
-@property --gradient-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
+/* CSS variables */
 :root {
   --clr-1: #0ff0fc;
   --clr-2: #bc13fe;
@@ -14,126 +10,105 @@
   --clr-5: #ff5e00;
   --clr-6: #000000;
   --clr-7: #232346;
-  --gradient-angle: 0deg;
   --ff-primary: "Varela Round", sans-serif;
+  --gradient-angle: 0deg;
+}
+
+/* Reset some styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: var(--ff-primary);
-  background-color: rgba(20, 20, 80, 0.75); /* Increased transparency here */
-  background-image: url("/dream/public/images/retro-bg.jpg"); /* Add your image here */
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-main {
-  position: relative;
-  max-width: 600px;
+  background-image: url("/images/retro-bg.jpg");
+  font-family: var(--ff-primary), sans-serif;
+  color: var(--clr-1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  background-color: rgba(20, 20, 80, 0.3);
-  border-radius: 0.5rem;
-  backdrop-filter: blur(20px);
-  color: white;
-  width: 60%; /* set width to a percentage of parent */
-  min-height: 60vh; /* set a minimum height */
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
-main::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  bottom: -10px;
-  left: -10px;
-  border: 10px solid;
-  border-radius: 0.5rem;
-  border-image: conic-gradient(
-      from var(--gradient-angle),
-      var(--clr-1),
-      var(--clr-2),
-      var(--clr-3),
-      var(--clr-4),
-      var(--clr-5),
-      var(--clr-4),
-      var(--clr-3),
-      var(--clr-2),
-      var(--clr-1)
-    )
-    1;
-  filter: blur(5px);
-  z-index: -1;
-}
+/* Styles for Card */
 
-.form-group,
-#promptInput,
-.button,
-.labelBox {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 3px solid rgba(255, 255, 255, 0.5);
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  border-radius: 10px;
-  padding: 1rem;
+.card {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 1rem;
-  font-weight: bold;
-  color: white;
-}
-
-.form-group {
-  width: 100%;
-  background-color: transparent;
-  border: none;
+  justify-content: center;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  blur: 10px;
+  padding: 2em;
+  border-radius: 10px;
+  border: 3px solid;
+  border-image-slice: 1;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.card-title {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 1em;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
 }
 
 #promptInput {
-  height: auto;
-  border-radius: 10px;
-  padding: 1rem;
-  font-size: 1.5rem;
-  color: white;
-  resize: none;
-  line-height: 1.5;
-}
-
-#promptInput:focus {
+  width: 100%;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid var(--clr-1);
+  background-color: rgba(255, 255, 255, 0.1);
+  text-align: left;
+  color: var(--clr-1);
+  border: none;
   outline: none;
+  resize: none;
 }
 
-.button {
-  background-color: white transparent;
-  padding: 10px 10px;
-  margin-top: 10px;
-  text-align: center;
-  display: flex;
-  font-size: 16px;
+#generate {
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  color: var(--clr-1);
+  background-color: var(--clr-2);
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  width: 50%;
-  color: white;
-  border-radius: 10px;
-  transition: 0.66s ease-in-out;
-  margin: 20px auto;
-  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-.button:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  color: var(--clr-7);
-  transition: 0.66s ease-in-out;
+#generate:hover {
+  background-color: var(--clr-2);
+}
+
+/* Styles for Image Processor */
+.result-window {
+  display: flex;
+  width: 250px;
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+#resultImage {
+  max-width: 250px;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
 }
