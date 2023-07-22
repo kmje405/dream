@@ -1,61 +1,82 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Object to store DOM elements
   const domElements = {
-    textarea: document.querySelector("#promptInput"),
-    submitButton: document.querySelector("#generate"),
+    promptInput: document.querySelector("#promptInput"),
+    generateButton: document.querySelector("#generate"),
     loadingMessage: document.querySelector("#loadingMessage"),
-    resultWindow: document.querySelector("#imageProcessor"),
     resultImage: document.querySelector("#resultImage"),
   };
 
-  // Function to toggle UI Elements
-  function toggleUIElements(isLoading, showButton) {
-    domElements.loadingMessage.style.display = isLoading ? "block" : "none";
-    domElements.textarea.style.display = showButton ? "none" : "block";
-    domElements.resultWindow.style.display = isLoading ? "none" : "block";
+  domElements.promptInput.value = '';
 
-    if (showButton) {
-      domElements.submitButton.textContent = "Ready for Another Prompt";
-    } else {
-      domElements.submitButton.textContent = "Generate";
-    }
+
+  // Initial state of the page
+  let isLoading = false;
+  let imageLoaded = false;
+
+  // Function to handle submission
+  function submitPrompt() {
+    isLoading = true;
+    domElements.promptInput.style.display = 'none';
+    domElements.generateButton.style.display = 'none';
+    domElements.loadingMessage.style.display = 'block';
+
+    // Fetch request
+    fetch('http://localhost:3000/dream', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: domElements.promptInput.value
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        displayImage(data.image);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        resetPage();
+      });
   }
 
-  // Function to fetch Dream Image
-  async function fetchDreamImage(prompt) {
-    const response = await fetch("http://localhost:3000/dream", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
-    });
+  // Function to display image
+  function displayImage(url) {
+    isLoading = false;
+    imageLoaded = true;
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch dream image");
-    }
-
-    const { image } = await response.json();
-    return image;
+    domElements.loadingMessage.style.display = 'none';
+    domElements.resultImage.src = url;
+    domElements.resultImage.style.display = 'block';
+    domElements.generateButton.innerText = 'Submit another response';
+    domElements.generateButton.style.display = 'block';
   }
 
-  // Add event listener for Button Click
-  domElements.submitButton.addEventListener("click", async (e) => {
-    e.preventDefault();
+  // Function to reset page
+  function resetPage() {
+    imageLoaded = false;
+    domElements.promptInput.style.display = 'block';
+    domElements.generateButton.style.display = 'block';
+    domElements.generateButton.innerText = 'Generate';
+    domElements.resultImage.style.display = 'none';
+    domElements.loadingMessage.style.display = 'none';
+    domElements.promptInput.value = '';
+  }
 
-    // If the button text is "Generate", fetch the image and display it
-    if (domElements.submitButton.textContent === "Generate") {
-      try {
-        toggleUIElements(true, false);
-        const image = await fetchDreamImage(domElements.textarea.value);
-        domElements.resultImage.src = image;
-        domElements.resultImage.style.display = "block";
-        toggleUIElements(false, true);
-      } catch (err) {
-        console.error(err);
-        toggleUIElements(false, false);
-      }
-    } else {
-      // If the button text is "Ready for Another Prompt", reload the page
+  // Event Listener for the Generate Button
+  domElements.generateButton.addEventListener('click', function () {
+    if (isLoading || imageLoaded) {
       location.reload();
+    } else {
+      submitPrompt();
+    }
+  });
+
+  // Event Listener for the Enter Key
+  domElements.promptInput.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+      submitPrompt();
     }
   });
 });
