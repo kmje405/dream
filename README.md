@@ -7,7 +7,6 @@ This AI Photo Generator is a project that integrates OpenAI's DALL·E to generat
 - Takes user input as a prompt to generate custom images.
 - An aesthetically pleasing and responsive front-end.
 - Backend server to handle communication with OpenAI's DALL·E API.
-- Gradient color animations.
 
 ## Setup and Installation
 
@@ -49,8 +48,7 @@ The server is built using Express.js and makes use of the OpenAI API to generate
 
 ### Client-Side JavaScript
 
-Client-side JavaScript is responsible for handling the form submission event, sending the prompt to the server, and displaying the generated image. A custom function, `rotateGradient`, is also defined to handle the gradient rotation animation.
-
+Client-side JavaScript is responsible for handling the form submission event, sending the prompt to the server, and displaying the generated image. 
 Please ensure to keep the documentation updated as the code evolves, to help current and future developers understand the design and implementation choices.
 
 ## License
